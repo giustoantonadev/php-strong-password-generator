@@ -1,19 +1,32 @@
 <?php
 
+session_start();
+
 require_once 'functions.php';
 
 $passwordLength = isset($_GET['length']) ? (int)$_GET['length'] : 0;
+
+if ($passwordLength >  0) {
+    $generatedPassword = generatePassword($passwordLength);
+
+    $_SESSION['generated_password'] = $generatedPassword;
+
+    header('Location: result.php');
+    exit();
+}
 
 
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Password Generator</title>
 </head>
+
 <body>
     <h1>Password Generator</h1>
     <form action="index.php" method="get">
@@ -23,9 +36,11 @@ $passwordLength = isset($_GET['length']) ? (int)$_GET['length'] : 0;
         <input type="submit" value="Generate Password">
     </form>
     <?php
-    if ($passwordLength > 0) {
-        echo "<p>Generated Password: " . htmlspecialchars(generatePassword($passwordLength)) . "</p>";
+    if (isset($_SESSION['generated_password'])) {
+        echo "<p>Generated Password: " . htmlspecialchars($_SESSION['generated_password']) . "</p>";
+        unset($_SESSION['generated_password']);
     }
     ?>
 </body>
+
 </html>
