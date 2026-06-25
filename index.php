@@ -33,13 +33,15 @@ if ($passwordLength > 0) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Password Generator</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <h1>Password Generator</h1>
-    <form action="index.php" method="get">
-        <label for="length">Password Length:</label>
-        <input type="number" id="length" name="length" min="1" max="10" required>
+    <div class="app-card">
+        <h1>Password Generator</h1>
+        <form action="index.php" method="get">
+            <label for="length">Password Length:</label>
+            <input type="number" id="length" name="length" min="1" max="10" required>
         <br><br>
         <input type="checkbox" id="lowercase" name="lowercase" checked>
         <label for="lowercase">Include Lowercase</label>
